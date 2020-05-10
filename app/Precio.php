@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Precio extends Model
 {
-    //
+    protected $fillable = [
+        "type",
+        "costo",
+        "active"
+    ];
 }
