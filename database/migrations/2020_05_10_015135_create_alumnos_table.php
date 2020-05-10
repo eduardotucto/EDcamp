@@ -24,7 +24,7 @@ class CreateAlumnosTable extends Migration
             $table->boolean('assistance');
             $table->string('phone',15);
             // llave foranea
-            $table->integer('idCompany')->unsigned();
+            $table->unsignedBigInteger('idCompany');
             $table->foreign('idCompany')->references('id')->on('empresas');
         });
     }
