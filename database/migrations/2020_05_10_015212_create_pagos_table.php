@@ -16,6 +16,12 @@ class CreatePagosTable extends Migration
         Schema::create('pagos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            // how to adding foreign keys
+            $table->integer('idStudent')->unsigned();
+            $table->integer('idCost')->unsigned();
+
+            $table->foreign('idStudent')->references('id')->on('alumno');
+            $table->foreign('idCost')->references('id')->on('precios');
         });
     }
 

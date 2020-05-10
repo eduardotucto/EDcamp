@@ -15,7 +15,10 @@ class CreateEmpresasTable extends Migration
     {
         Schema::create('empresas', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->timestamps(); // sirve para dar marcas de tiempo a created_at & updated_at
+            $table->string('name', 255)->unique();
+            $table->string('description', 255);
+            $table->string('phone', 15);
         });
     }
 

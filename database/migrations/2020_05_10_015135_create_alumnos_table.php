@@ -16,6 +16,16 @@ class CreateAlumnosTable extends Migration
         Schema::create('alumnos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('name',255);
+            $table->string('lastname',255);
+            $table->string('email',255)->unique();
+            $table->enum('state',array('Paid','Pending'))->default('Pending'); // it's like a string but it's can only have one of those values
+            $table->boolean('peruvian');
+            $table->boolean('assistance');
+            $table->string('phone',15);
+            // llave foranea
+            $table->integer('idCompany')->unsigned();
+            $table->foreign('idCompany')->references('id')->on('empresas');
         });
     }
 
