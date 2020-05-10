@@ -17,10 +17,10 @@ class CreatePagosTable extends Migration
             $table->id();
             $table->timestamps();
             // how to adding foreign keys
-            $table->integer('idStudent')->unsigned();
-            $table->integer('idCost')->unsigned();
+            $table->unsignedBigInteger('idStudent');
+            $table->unsignedBigInteger('idCost');
 
-            $table->foreign('idStudent')->references('id')->on('alumno');
+            $table->foreign('idStudent')->references('id')->on('alumnos');
             $table->foreign('idCost')->references('id')->on('precios');
         });
     }
