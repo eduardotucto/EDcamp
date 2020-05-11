@@ -14,18 +14,11 @@ class PrecioController extends Controller
      */
     public function index()
     {
-        //
+        // esto retorna todo lo que hay en la base de datos (consultar)
+        return Precio::all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    // Eliminamos create() porque no crearemos ningun formulario para crear un precio
 
     /**
      * Store a newly created resource in storage.
@@ -35,7 +28,9 @@ class PrecioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // store crea un precio sin crear formulario (crear)
+        $precio = Precio::create($request->all());
+        return $precio;
     }
 
     /**
@@ -46,19 +41,11 @@ class PrecioController extends Controller
      */
     public function show(Precio $precio)
     {
-        //
+        // para buscar un precio (motrar)
+        return $precio;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Precio  $precio
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Precio $precio)
-    {
-        //
-    }
+    // Eliminamos edit(Precio $precio) pq tapoco lo usaremos
 
     /**
      * Update the specified resource in storage.
@@ -69,7 +56,9 @@ class PrecioController extends Controller
      */
     public function update(Request $request, Precio $precio)
     {
-        //
+        // recibir info y actualizar algun dato
+        $precio->update($request->all());
+        return $precio;
     }
 
     /**
@@ -81,5 +70,7 @@ class PrecioController extends Controller
     public function destroy(Precio $precio)
     {
         //
+        $precio->delete();
+        return $precio;
     }
 }
