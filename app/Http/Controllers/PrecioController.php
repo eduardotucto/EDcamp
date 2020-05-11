@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Precio;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class PrecioController extends Controller
 {
@@ -15,7 +16,12 @@ class PrecioController extends Controller
     public function index()
     {
         // esto retorna todo lo que hay en la base de datos (consultar)
-        return Precio::all();
+        $precios = Precio::all();
+
+        return response()->json([
+            "data" => $precios,
+            "status" => Response::HTTP_OK, // 200
+        ], Response::HTTP_OK);
     }
 
     // Eliminamos create() porque no crearemos ningun formulario para crear un precio
@@ -30,7 +36,11 @@ class PrecioController extends Controller
     {
         // store crea un precio sin crear formulario (crear)
         $precio = Precio::create($request->all());
-        return $precio;
+        return response()->json([
+            "message" => "El precio ha sido creado correctamente",
+            "data" => $precio,
+            "status" => Response::HTTP_CREATED, // 201
+        ], Response::HTTP_CREATED);
     }
 
     /**
@@ -42,7 +52,11 @@ class PrecioController extends Controller
     public function show(Precio $precio)
     {
         // para buscar un precio (motrar)
-        return $precio;
+        return response()->json([
+            "message" => "El precio ha sido creado correctamente",
+            "data" => $precio,
+            "status" => Response::HTTP_OK, // 200
+        ], Response::HTTP_OK);
     }
 
     // Eliminamos edit(Precio $precio) pq tapoco lo usaremos
@@ -58,7 +72,11 @@ class PrecioController extends Controller
     {
         // recibir info y actualizar algun dato
         $precio->update($request->all());
-        return $precio;
+        return response()->json([
+            "message" => "El precio ha sido actualizado correctamente",
+            "data" => $precio,
+            "status" => Response::HTTP_OK, // 200
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -71,6 +89,10 @@ class PrecioController extends Controller
     {
         //
         $precio->delete();
-        return $precio;
+        return response()->json([
+            "message" => "El precio ha sido eliminado correctamente",
+            "data" => $precio,
+            "status" => Response::HTTP_OK, // 200
+        ], Response::HTTP_OK);
     }
 }
