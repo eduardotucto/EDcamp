@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Http\Response;
 
 class Handler extends ExceptionHandler
 {
@@ -50,6 +51,13 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        if (get_class($exception) === "Illuminate\Database\Eloquent\ModelNotFoundException")
+        {
+            return response()->json([
+               "message" => "El ID no existe en la base de datos",
+               "status" => Response::HTTP_NOT_FOUND // 404
+           ]);
+        }
         return parent::render($request, $exception);
     }
 }
