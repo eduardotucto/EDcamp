@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Alumno;
+use App\Empresa;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -52,9 +53,13 @@ class AlumnoController extends Controller
     public function show(Alumno $alumno)
     {
         // para buscar un alumno (mostrar)
+
+        // lo que hace es buscar una empresa por la llave foranea que tiene alumno(idCompany)
+        $empresa = Empresa::findOrFail($alumno->idCompany);
         return response()->json([
             "message" => "El alumno ha sido mostrado correctamente",
-            "data" => $alumno,
+            "alumno" => $alumno,
+            "empresa" => $empresa,
             "status" => Response::HTTP_OK, // 200
         ], Response::HTTP_OK);
     }
@@ -96,3 +101,4 @@ class AlumnoController extends Controller
         ], Response::HTTP_OK);
     }
 }
+// anidando informacion

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Pago;
+use App\Alumno;
+use App\Precio;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -52,9 +54,15 @@ class PagoController extends Controller
     public function show(Pago $pago)
     {
         // para buscar un pago (motrar)
+
+        // buscar un alumno por la llave foranea que tiene pago(idStudent)
+        $alumno = Alumno::findOrFail($pago->idStudent);
+        // buscar un precio por la llave foranea que tiene pago(idCost)
+        $precio = Precio::findOrFail($pago->idCost);
         return response()->json([
-            "message" => "El pago ha sido mostrado correctamente",
-            "data" => $pago,
+            "pago" => $pago,
+            "alumno" => $alumno,
+            "precio" => $precio,
             "status" => Response::HTTP_OK, // 200
         ], Response::HTTP_OK);
     }
