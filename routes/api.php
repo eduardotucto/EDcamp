@@ -18,3 +18,6 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 Route::apiResource('/precios', 'PrecioController');
+Route::apiResource('/empresas', 'EmpresaController');
+Route::apiResource('/alumnos', 'AlumnoController');
+Route::apiResource('/pagos', 'PagoController');
