@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Alumno;
 use App\Empresa;
+use App\Precio;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -56,10 +58,14 @@ class AlumnoController extends Controller
 
         // lo que hace es buscar una empresa por la llave foranea que tiene alumno(idCompany)
         $empresa = Empresa::findOrFail($alumno->idCompany);
+        $pago = DB::table('pagos')->where('idStudent',$alumno->id)->first();
+        $precio = Precio::findOrFail($pago->idCost);
         return response()->json([
             "message" => "El alumno ha sido mostrado correctamente",
             "alumno" => $alumno,
             "empresa" => $empresa,
+            "pago" => $pago,
+            "precio" => $precio,
             "status" => Response::HTTP_OK, // 200
         ], Response::HTTP_OK);
     }
